@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/util         
+		http://www.springframework.org/schema/util/spring-util-3.2.xsd         
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd         
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd         
+		http://www.springframework.org/schema/tx          
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd         
+		http://www.springframework.org/schema/aop          
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd         
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd" >
+
+    <context:component-scan base-package="ren.maojiang.peso.controller"/>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20971520" />
+        <property name="maxInMemorySize" value="4096" />
+    </bean>
+
+    <!-- 添加注解驱动 -->
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler/>
+    <!-- cache-period: 设置一年的缓存时间以最大化的利用浏览器缓存和减少服务器压力 -->
+
+    <!--<mvc:resources location="/WEB-INF/img/" mapping="/img/**" cache-period="31556926"/>-->
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**" cache-period="31556926"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**" cache-period="31556926"/>
+    <!--<mvc:resources location="/WEB-INF/font/" mapping="/font/**" cache-period="31556926"/>-->
+    <mvc:resources location="/WEB-INF/fonts/" mapping="/fonts/**" cache-period="31556926"/>
+    <!--<mvc:resources location="/WEB-INF/html/" mapping="/html/**" cache-period="31556926"/>-->
+    <!--<mvc:resources location="/WEB-INF/json/" mapping="/json/**" cache-period="31556926"/>-->
+    <!--
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp"></bean>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/" p:suffix=""></bean>
+
+    <bean id="commonResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="prefix" value="/console/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="0"></property>
+    </bean> 
+     -->
+
+    <!-- 针对freemarker的视图配置 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="requestContextAttribute" value="request" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="order" value="1"></property>
+    </bean>
+    <bean id="freemarkerConfig"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<bean id="freemarkerConfig"-->
+          <!--class="ren.maojiang.cms.shiro.ShiroTagFreeMarkerConfigurer">-->
+        <!--<property name="templateLoaderPath" value="/WEB-INF/ftl/" />-->
+        <!--<property name="templateLoaderPath" value="classpath:ftl/" />-->
+        <!--<property name="freemarkerSettings">-->
+            <!--<props>-->
+                <!--<prop key="template_update_delay">0</prop>-->
+                <!--<prop key="default_encoding">UTF-8</prop>-->
+                <!--<prop key="number_format">0.##########</prop>-->
+                <!--<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>-->
+                <!--<prop key="classic_compatible">true</prop>-->
+                <!--<prop key="template_exception_handler">ignore</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!-- 这里需要加入这个，才可以令shiro的注解模式生效 -->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="org.apache.shiro.authz.UnauthorizedException">/403</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
+
+    <!-- To translate any MongoExceptions thrown in @Repository annotated classes
+    <context:annotation-config />  -->
+</beans>

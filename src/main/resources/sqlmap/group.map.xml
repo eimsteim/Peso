@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ren.maojiang.peso.mapper.GroupMapper">
+
+
+    <select id="getAllGroup" resultType="ren.maojiang.peso.model.ConfigGroup" parameterType="map">
+        SELECT *
+        FROM config_group
+    </select>
+
+    <select id="getGroupByName" resultType="ren.maojiang.peso.model.ConfigGroup" parameterType="string">
+        SELECT * FROM config_group
+        WHERE group_name = #{groupName}
+    </select>
+</mapper>

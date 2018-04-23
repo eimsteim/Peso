@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration   
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	<!-- http://www.mybatis.org/core/zh/configuration.html -->
+<configuration>
+	<!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 -->
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<!-- 允许使用列标签代替列名 -->
+		<setting name="useColumnLabel" value="true" />
+		<!-- 数据库超过300秒仍未响应则超时 -->
+		<setting name="defaultStatementTimeout" value="300" />
+	</settings>
+	
+	<typeAliases>
+		<!-- 实体类别名 -->
+		<typeAlias alias="Config" type="ren.maojiang.peso.model.Config"/>
+		<!--  -->
+	</typeAliases>
+</configuration>

@@ -1,0 +1,23 @@
+.ellipsis_title {
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.preview-table table {
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid #dddddd;
+    border-collapse: collapse !important;
+    border-radius: 1px;
+    width: 100%;
+}
+.preview-table table tbody td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+.bootbox-body p{
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+    word-wrap: break-word;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ren.maojiang.peso.mapper.ConfigMapper">
+
+    <select id="getConfig" resultType="ren.maojiang.peso.model.Config" parameterType="map">
+        SELECT * FROM config
+        WHERE 1=1
+        <if test="null != map.id">
+            AND id = #{map.id}
+        </if>
+        <if test="null != map.groupName">
+            AND group_name = #{map.groupName}
+        </if>
+        <if test="null != map.env">
+            AND env = #{map.env}
+        </if>
+        <if test="null != map.title">
+            AND title = #{map.title}
+        </if>
+
+    </select>
+
+    <select id="getConfigList" resultType="ren.maojiang.peso.model.Config" parameterType="map">
+        SELECT * FROM config
+        WHERE 1=1
+        <if test="null != map.groupName">
+            AND group_name = #{map.groupName}
+        </if>
+        <if test="null != map.env">
+            AND env = #{map.env}
+        </if>
+        <if test="null != map.title">
+            AND title = #{map.title}
+        </if>
+        order by ${page.sort} ${page.order}
+        <if test="page.pageSize>0">
+            limit #{page.offset},#{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getAllConfig" resultType="ren.maojiang.peso.model.Config" parameterType="map">
+        SELECT * FROM config
+        WHERE 1=1
+        <if test="null != map.groupName">
+            AND group_name = #{map.groupName}
+        </if>
+        <if test="null != map.env">
+            AND env = #{map.env}
+        </if>
+        <if test="null != map.title">
+            AND title = #{map.title}
+        </if>
+    </select>
+
+    <insert id="saveConfig" parameterType="ren.maojiang.peso.model.Config">
+      INSERT INTO config(title, content, group_name, env, ver, create_time, update_time)
+      VALUES (#{title}, #{content}, #{groupName}, #{env}, #{ver}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="countConfig" resultType="int">
+        select count(*) from config
+        WHERE 1=1
+        <if test="null != map.groupName">
+            AND group_name = #{map.groupName}
+        </if>
+        <if test="null != map.env">
+            AND env = #{map.env}
+        </if>
+        <if test="null != map.title">
+            AND title = #{map.title}
+        </if>
+    </select>
+
+    <delete id="deleteConfig" parameterType="long">
+        DELETE FROM config
+        WHERE id = #{id}
+    </delete>
+
+</mapper> 
